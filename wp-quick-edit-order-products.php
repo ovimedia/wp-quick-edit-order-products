@@ -5,7 +5,7 @@ Description: Edit the order of woocommerce product in the quick edit.
 Author: Ovi García - ovimedia.es
 Author URI: http://www.ovimedia.es/
 Text Domain: wp-quick-edit-order-produts
-Version: 0.1
+Version: 0.2
 Plugin URI: http://www.ovimedia.es/
 */
 
@@ -175,5 +175,13 @@ function wpex_order_category( $query )
 
 add_action( 'pre_get_posts', 'wpex_order_category', 1 );
 add_filter('parse_query', 'wpex_order_category' );
+
+add_action( 'woocommerce_product_query',  'change_order_search'); 	
+
+function change_order_search($query)
+{
+    $query->set( 'orderby', "menu_order");
+    $query->set( 'order', "ASC");
+}
 
 ?>
